@@ -1,0 +1,4 @@
+{
+	"weatherAPIurl" : "http://bulk.openweathermap.org/sample/",
+	"citiesFileName" : "city.list.json.gz"
+}
