@@ -5,6 +5,7 @@ var fs = require('fs');
 var zlib = require('zlib');
 var EventEmitter = require("events").EventEmitter;
 var citiesBuffer = [];
+var citiesArray = [];
 var apiUrl = settings.weatherAPIurl + settings.citiesFileName;
 
 var HOST = '127.0.0.1';
@@ -47,28 +48,34 @@ net.createServer(function(sock) {
         //console.log('DATA ' + sock.remoteAddress + ': ' + data);
         // Write the data back to the socket, the client will receive it as data from the server
         sock.write('You said "' + data + '"');
-        if(data){
-        	
-        	/*var c = citiesBuffer[0].split("\n");
-        	console.log(JSON.parse(c[0]));*/
-        	
-        	for (var i = 1; i >= 0; i--) {
-        		var cities = citiesBuffer[i].split("\n")
-        		for (var i = 5; i >= 1; i--) {
-        			var city = JSON.parse(cities[i]);
-        			console.log('city: ', city.name );
-        		};
-        		
-        	};
-        	
+        if (data) {
 
-        	//console.log(cityArray[0]);
+            /*var c = citiesBuffer[0].split("\n");
+            console.log(JSON.parse(c[0]));*/
+
+           /* for (var i = citiesBuffer.length - 1; i >= 0; i--) {
+                var cities = citiesBuffer[i].split("\n")
+                for (var i = cities.length - 1; i >= 1; i--) {
+                    try {
+                        var city = JSON.parse(cities[i]);
+                        //console.log('city: ', city);
+                        citiesArray.push(city);
+                    } catch (e) {
+                        break;
+                    }
+                };
+            };*/
+
+            var cityWeatherUrl = settings.cityWeatherUrl + '?q=' + data + '&appid=' + settings.appId;            
+            http.get(cityWeatherUrl, function (w) {
+            	console.log(w);
+            })
 
         }
 
     });
 
-    
+
 
 
     // Add a 'close' event handler to this instance of socket
@@ -80,6 +87,6 @@ net.createServer(function(sock) {
 
 console.log('Server listening on ' + HOST + ':' + PORT);
 getCities(apiUrl, function(err, data) {
-      if(err) console.log('err : ',err);
-      console.log('all cities : ' + data.length);
+    if (err) console.log('err : ', err);
+    console.log('all cities : ' + data.length);
 });
