@@ -1,3 +1,3 @@
 #usage:
-* run `node tcp-server.js`
-* run `node tcp-client.js London`
+* open terminal and run `node tcp-server.js`
+* open another termianl and run `node tcp-client.js London` (change 'London' to whatever city you want)
