@@ -21,8 +21,10 @@ client.connect(settings.PORT, settings.HOST, function() {
 // Add a 'data' event handler for the client socket
 // data is what the server sent to this socket
 client.on('data', function(data) {
-
-    console.log('DATA: ' + data);
+    var parsed = JSON.parse(data);
+    console.log('city name: ' + parsed.name);
+    console.log('weather: ' + parsed.weather[0].main + ' (' + parsed.weather[0].description + ')');
+    console.log('temperature (celsius):' + parsed.main.temp_min + '-' + parsed.main.temp_max);
     // Close the client socket completely
     client.destroy();
 

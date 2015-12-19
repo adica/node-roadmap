@@ -1,7 +1,5 @@
-{
-	"weatherAPIurl" : "http://bulk.openweathermap.org/sample/",
-	"citiesFileName" : "city.list.json.gz",
-	"cityWeatherUrl" : "http://api.openweathermap.org/data/2.5/weather",
+{		
 	"HOST" : "127.0.0.1",
-	"PORT" : "6969"
+	"PORT" : "6969",
+	"apiAddress" : "api.openweathermap.org"
 }
