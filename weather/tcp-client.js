@@ -1,23 +1,20 @@
-var net = require('net');
-
-var HOST = '127.0.0.1';
-var PORT = 6969;
-var selectedCity;
-
-var client = new net.Socket();
-client.connect(PORT, HOST, function() {
-
-    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
-    // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client 
+const net = require('net');
+const settings = require('./settings.json');
 
 
-    process.argv.forEach(function(val, index, array) {
-        if (val === 'city' && typeof process.argv[index + 1] !== 'undefined')
-            selectedCity = process.argv[index + 1];
-    });
+const client = new net.Socket();
+client.setKeepAlive(true);
+const city = process.argv[2];
 
-    console.log('selectedCity: ', selectedCity);
-    client.write(selectedCity);
+client.connect(settings.PORT, settings.HOST, function() {
+
+    console.log('CONNECTED TO: ' + settings.HOST + ':' + settings.PORT);
+    // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
+    const query = {
+      action: 'getForecast',
+      city: city
+    }
+    client.write(JSON.stringify(query));
 
 });
 
@@ -30,9 +27,6 @@ client.on('data', function(data) {
     client.destroy();
 
 });
-
-
-
 
 
 // Add a 'close' event handler for the client socket
