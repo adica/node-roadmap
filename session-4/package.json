@@ -1,0 +1,11 @@
+{
+  "name": "session-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test-server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
