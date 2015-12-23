@@ -21,7 +21,7 @@ client.connect(settings.PORT, settings.HOST, function() {
 // Add a 'data' event handler for the client socket
 // data is what the server sent to this socket
 client.on('data', function(data) {
-    var parsed = JSON.parse(data);
+    var parsed = JSON.parse(data); 
     var presentation = {
         'name' : parsed.name,
         'weather' : parsed.weather[0].main,
