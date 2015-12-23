@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const settings = require("./settings");
 const net = require('net');
+const api = require('./client-api.js');
 const cities = {};
 const coords = {};
 const file = fs.readFileSync(path.join(__dirname,'data/city.list.json'), 'utf8');
@@ -23,9 +24,14 @@ var server = net.createServer(function(socket) {
       case 'getForecast':
         console.log('getting forecast for city ', evt.city);
         if (evt.city) {
-          socket.write('City valid');
+          api.forCity(evt.city, (err, result) => {
+              if (err) {
+                return console.error(err);
+              }
+              socket.end(JSON.stringify(result));
+            });
         } else {
-          socket.end('City not provided');
+          socket.write('City not provided');
         }
       }
     })

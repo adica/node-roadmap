@@ -30,6 +30,7 @@ var forCity = exports.forCity = function forCity (city, callback){
   req.end();
 }
 
+/*for testing
 forCity('Tel Aviv',function (err, data) {
 	console.log(data)
-})
+})*/
