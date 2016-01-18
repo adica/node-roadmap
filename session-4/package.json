@@ -7,5 +7,10 @@
     "test": "node test-server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongojs": "^2.3.0",
+    "passport": "^0.3.2"
+  }
 }
